@@ -31,7 +31,7 @@ jobs:
       - name: Create Artifact Path
         run: |
           mkdir -p alerting-artifacts
-          cp ./build/distributions/*.zip alerting-artifacts
+          cp ./alerting/build/distributions/*.zip alerting-artifacts
       # This step uses the upload-artifact Github action: https://github.com/actions/upload-artifact
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
