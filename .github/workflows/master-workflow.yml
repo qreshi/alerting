@@ -11,9 +11,10 @@ on:
 jobs:
   build:
     strategy:
-      java: 12 
+      matrix:
+        java: [12]
     # Job name
-    name: Build Alerting with JDK ${{ java }}
+    name: Build Alerting with JDK ${{ matrix.java }}
     # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
@@ -21,10 +22,10 @@ jobs:
       - name: Checkout Branch
         uses: actions/checkout@v1
       # This step uses the setup-java Github action: https://github.com/actions/setup-java
-      - name: Set Up JDK ${{ java }}
+      - name: Set Up JDK ${{ matrix.java }}
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ java }}
+          java-version: ${{ matrix.java }}
       - name: Build with Gradle
         run: ./gradlew build
       - name: Create Artifact Path
