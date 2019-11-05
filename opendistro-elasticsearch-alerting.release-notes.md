@@ -1,9 +1,19 @@
-## Version 1.2.0 (Current)
+## Version 1.3.0 (Current)
+
+### New Features
+  * Adds support for Elasticsearch 7.3.2 - [PR #122](https://github.com/opendistro-for-elasticsearch/alerting/pull/122)
+  * Cleanup ElasticThreadContextElement - [PR #95](https://github.com/opendistro-for-elasticsearch/alerting/pull/95)
+  * Adds new type of input for Monitors, HttpInput - [PR #82](https://github.com/opendistro-for-elasticsearch/alerting/pull/82)
+
+## Bug Fixes
+  * Fixes allowing interval to be set with 0 or negative values - [PR #92](https://github.com/opendistro-for-elasticsearch/alerting/pull/92)
+
+## 2019-09-20, Version 1.2.0
 
 ### New Features
   * Adds support for Elasticsearch 7.2.0 - [PR #89](https://github.com/opendistro-for-elasticsearch/alerting/pull/89)
 
-### Bug fixes
+### Bug Fixes
   * Fixes integTestRunner build task - [PR #83](https://github.com/opendistro-for-elasticsearch/alerting/pull/83)
 
 ## 2019-07-25, Version 1.1.0
@@ -18,7 +28,7 @@
   * Adds support for Elasticsearch 7.0.1 - [PR #41](https://github.com/opendistro-for-elasticsearch/alerting/pull/41)
   * Adds support for throttling on actions - [PR #48](https://github.com/opendistro-for-elasticsearch/alerting/pull/48)
 
-### Bug fixes
+### Bug Fixes
   * Validate all 2XX status code in Webhook response  - [PR #50](https://github.com/opendistro-for-elasticsearch/alerting/pull/50)
   * Allows encoding while constructing HTTP request for sending notification - [PR #35](https://github.com/opendistro-for-elasticsearch/alerting/pull/35)
   * Convert AlertMover/MonitorRunner to coroutines - [PR #11](https://github.com/opendistro-for-elasticsearch/alerting/pull/11)
@@ -31,7 +41,7 @@
   * Allow encoding while constructing HTTP request for sending notification - [PR #35](https://github.com/opendistro-for-elasticsearch/alerting/pull/35)
   * Add build for Debian - #36
 
-### Bug fixes
+### Bug Fixes
   * Fix update LastFullSweepTime if the index doesn't exist - #17
   * Adds more alert properties to templateArgs for context variable - #26
 
@@ -41,7 +51,7 @@
   * Adds support for Elasticsearch 6.6.2 - [PR #8](https://github.com/opendistro-for-elasticsearch/alerting/pull/8)
   * Upgrade to latest Kotlin version - [PR #7](https://github.com/opendistro-for-elasticsearch/alerting/pull/7)
 
-### Bug fixes
+### Bug Fixes
   * Fixed task name in build instructions - [PR #12](https://github.com/opendistro-for-elasticsearch/alerting/pull/12)
 
 ## 2019-01-31, Version 0.7.0
