@@ -118,7 +118,7 @@ abstract class AlertingRestTestCase : ESRestTestCase() {
                 chime = null,
                 slack = null,
                 customWebhook = null,
-                mail = null)
+                email = null)
     }
 
     protected fun verifyIndexSchemaVersion(index: String, expectedVersion: Int) {
