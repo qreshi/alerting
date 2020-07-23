@@ -18,7 +18,7 @@ package com.amazon.opendistroforelasticsearch.alerting.model
 import com.amazon.opendistroforelasticsearch.alerting.model.destination.Chime
 import com.amazon.opendistroforelasticsearch.alerting.model.destination.CustomWebhook
 import com.amazon.opendistroforelasticsearch.alerting.model.destination.Slack
-import com.amazon.opendistroforelasticsearch.alerting.model.destination.Email
+import com.amazon.opendistroforelasticsearch.alerting.model.destination.email.Email
 import org.elasticsearch.test.ESTestCase
 
 class DestinationTests : ESTestCase() {
