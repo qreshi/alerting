@@ -25,6 +25,9 @@ import com.amazon.opendistroforelasticsearch.alerting.core.model.SearchInput
 import com.amazon.opendistroforelasticsearch.alerting.elasticapi.string
 import com.amazon.opendistroforelasticsearch.alerting.model.ActionExecutionResult
 import com.amazon.opendistroforelasticsearch.alerting.model.action.Throttle
+import com.amazon.opendistroforelasticsearch.alerting.model.destination.email.EmailAccount
+import com.amazon.opendistroforelasticsearch.alerting.model.destination.email.EmailEntry
+import com.amazon.opendistroforelasticsearch.alerting.model.destination.email.EmailGroup
 import org.apache.http.Header
 import org.apache.http.HttpEntity
 import org.elasticsearch.client.Request
@@ -32,6 +35,7 @@ import org.elasticsearch.client.RequestOptions
 import org.elasticsearch.client.Response
 import org.elasticsearch.client.RestClient
 import org.elasticsearch.common.UUIDs
+import org.elasticsearch.common.settings.SecureString
 import org.elasticsearch.common.settings.Settings
 import org.elasticsearch.common.xcontent.LoggingDeprecationHandler
 import org.elasticsearch.common.xcontent.NamedXContentRegistry
@@ -82,6 +86,33 @@ fun randomTrigger(
         actions = if (actions.isEmpty()) (0..randomInt(10)).map { randomAction(destinationId = destinationId) } else actions)
 }
 
+fun randomEmailAccount(
+    name: String = ESRestTestCase.randomAlphaOfLength(10),
+    email: String = ESRestTestCase.randomAlphaOfLength(5) + "@email.com",
+    host: String = ESRestTestCase.randomAlphaOfLength(10),
+    port: Int = randomIntBetween(1, 100),
+    method: EmailAccount.MethodType = randomEmailAccountMethod(),
+    username: SecureString? = null,
+    password: SecureString? = null
+): EmailAccount {
+    return EmailAccount(
+        name = name,
+        email = email,
+        host = host,
+        port = port,
+        method = method,
+        username = username,
+        password = password
+    )
+}
+
+fun randomEmailGroup(
+    name: String = ESRestTestCase.randomAlphaOfLength(10),
+    emails: List<EmailEntry> = (1..randomInt(10)).map { EmailEntry(email = ESRestTestCase.randomAlphaOfLength(5) + "@email.com") }
+): EmailGroup {
+    return EmailGroup(name = name, emails = emails)
+}
+
 fun randomScript(source: String = "return " + ESRestTestCase.randomBoolean().toString()): Script = Script(source)
 
 val ALERTING_BASE_URI = "/_opendistro/_alerting/monitors"
@@ -115,6 +146,11 @@ fun randomAlert(monitor: Monitor = randomMonitor()): Alert {
             actionExecutionResults = actionExecutionResults)
 }
 
+fun randomEmailAccountMethod(): EmailAccount.MethodType {
+    val methodTypeCount = EmailAccount.MethodType.values().size
+    return EmailAccount.MethodType.values()[randomInt(methodTypeCount - 1)]
+}
+
 fun randomActionExecutionResult(
     actionId: String = UUIDs.base64UUID(),
     lastExecutionTime: Instant = Instant.now().truncatedTo(ChronoUnit.MILLIS),
@@ -122,6 +158,16 @@ fun randomActionExecutionResult(
 ) = ActionExecutionResult(actionId, lastExecutionTime, throttledCount)
 
 fun Monitor.toJsonString(): String {
+    val builder = XContentFactory.jsonBuilder()
+    return this.toXContent(builder).string()
+}
+
+fun EmailAccount.toJsonString(): String {
+    val builder = XContentFactory.jsonBuilder()
+    return this.toXContent(builder).string()
+}
+
+fun EmailGroup.toJsonString(): String {
     val builder = XContentFactory.jsonBuilder()
     return this.toXContent(builder).string()
 }
