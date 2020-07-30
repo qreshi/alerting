@@ -43,6 +43,7 @@ import com.amazon.opendistroforelasticsearch.alerting.resthandler.RestSearchEmai
 import com.amazon.opendistroforelasticsearch.alerting.resthandler.RestSearchMonitorAction
 import com.amazon.opendistroforelasticsearch.alerting.script.TriggerScript
 import com.amazon.opendistroforelasticsearch.alerting.settings.AlertingSettings
+import com.amazon.opendistroforelasticsearch.alerting.settings.DestinationSettings
 import org.elasticsearch.action.ActionRequest
 import org.elasticsearch.action.ActionResponse
 import org.elasticsearch.client.Client
@@ -186,7 +187,9 @@ internal class AlertingPlugin : PainlessExtension, ActionPlugin, ScriptPlugin, R
                 AlertingSettings.ALERT_HISTORY_RETENTION_PERIOD,
                 AlertingSettings.ALERTING_MAX_MONITORS,
                 AlertingSettings.REQUEST_TIMEOUT,
-                AlertingSettings.MAX_ACTION_THROTTLE_VALUE
+                AlertingSettings.MAX_ACTION_THROTTLE_VALUE,
+                DestinationSettings.EMAIL_USERNAME,
+                DestinationSettings.EMAIL_PASSWORD
             )
     }
 
